@@ -21,29 +21,44 @@ class Routes extends Component
             return;
         }
 
+        $previous_segment_is_numeric = false;
+
         foreach(array_reverse(\Request()->segments()) as $segment)
         {
             $segment = strtolower($segment);
 
             if(is_numeric($segment))
             {
+                $previous_segment_is_numeric = true;
                 $latest_id = $segment;
             }
             else{
                 $str_class = 'App\\Models\\'. ucwords($segment);
-                if(class_exists($str_class)){
+
+                if ($previous_segment_is_numeric && !class_exists($str_class))
+                {
+                    abort(404);
+                }
+                elseif(class_exists($str_class)){
                     $model = $str_class::findOrFail($latest_id);
                     $this->parents[] = $model;
                     $this->children[] = $segment . "s";
 
                 }
-                else{
+                elseif (sizeof($this->parents) == 0)
+                {
                     //most likely a subview (but can only exist on very first segment)
                     if($this->subview == "")
                         $this->subview = $segment;
                     else
                         $this->subview = $segment . "-" . $this->subview ;
                 }
+                else
+                {
+                    abort(404);
+                }
+
+                $previous_segment_is_numeric = false;
             }
         }
 

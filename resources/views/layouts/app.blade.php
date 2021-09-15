@@ -22,6 +22,10 @@
           @livewireStyles
     </head>
     <body class="antialiased">
+        <div style="width:100%;background: lightblue">
+        <livewire:breadcrumbs.firm />
+        </div>
+
         {{ $slot }}
     </body>
     @livewireScripts
