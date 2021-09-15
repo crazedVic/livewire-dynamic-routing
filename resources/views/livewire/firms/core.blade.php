@@ -3,23 +3,23 @@
     {{ $subview }}
     @switch($subview)
         @case("documents")
-            {{-- <livewire:firms.menu :active="$subview" /> --}}
+            <livewire:firms.menu :view="$subview" />
             <livewire:documents.index :owner="$firm"/>
         @break
         @case("documents-finance")
-            {{-- <livewire:firms.menu :active="$subview" /> --}}
+            <livewire:firms.menu :view="$subview" />
             <livewire:documents.index :owner="$firm" dept="Finance"/>
         @break
         @case("documents-hr")
-            {{-- <livewire:firms.menu :active="$subview" /> --}}
+            <livewire:firms.menu :view="$subview" />
             <livewire:documents.index :owner="$firm" dept="HR"/>
         @break
         @case("documents-legal")
-            {{-- <livewire:firms.menu :active="$subview" /> --}}
+            <livewire:firms.menu :view="$subview" />
             <livewire:documents.index :owner="$firm" dept="Legal"/>
         @break
         @case("details")
-            {{-- <livewire:firms.menu :active="$subview" /> --}}
+            <livewire:firms.menu view="" />
             <livewire:firms.read :firm="$firm"/>
         @break
         @case("documents-upload")

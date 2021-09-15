@@ -16,6 +16,11 @@ class Routes extends Component
 
         $latest_id = 0;
 
+        if(sizeof(\Request()->segments()) == 0){
+            $this->core = null;
+            return;
+        }
+
         foreach(array_reverse(\Request()->segments()) as $segment)
         {
             $segment = strtolower($segment);

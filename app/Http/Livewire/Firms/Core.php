@@ -9,7 +9,6 @@ class Core extends Component
 
     public $firm;
     public $subview;
-    public $parents;
 
     public function render()
     {

@@ -1,6 +1,13 @@
 <div>
     {{ $note->name }}<br>
-    subview: {{ $subview }}<br>
-    @dump($parents)
-
+    @switch($subview)
+        @case("details")
+            <livewire:notes.menu view="" />
+            <livewire:notes.read :note ="$note"/>
+        @break
+        @case("notes")
+            <livewire:notes.menu :view="$subview" />
+            <livewire:documents.index :owner="$note"/>
+        @break
+    @endswitch
 </div>
