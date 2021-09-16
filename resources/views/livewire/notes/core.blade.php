@@ -3,9 +3,9 @@
     @switch($subview)
         @case("details")
             <livewire:notes.menu view="" />
-            <livewire:notes.read :note ="$note"/>
+            <livewire:notes.read :note="$note"/>
         @break
-        @case("notes")
+        @case("documents")
             <livewire:notes.menu :view="$subview" />
             <livewire:documents.index :owner="$note"/>
         @break
