@@ -16,4 +16,3 @@ use App\Http\Livewire\Config;
 */
 Route::get('/config', Config\Home::class)->name('config-home');
 Route::get('/{any?}', Routes::class)->where('any', '.*')->name('home');
-

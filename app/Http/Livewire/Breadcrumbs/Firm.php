@@ -24,9 +24,15 @@ class Firm extends Component
 
         for ($i = 0; $i < count($segs); $i++)
         {
-            if (class_exists('App\Models\\' . $segs[$i]) && is_numeric($segs[$i + 1]))
+            if ($segs[$i] == 'global')
             {
-                $name = ('\App\Models\\' . ucwords($segs[$i]))::find($segs[$i+1])->name;
+                $name = 'App\Models\Firm'::find(1)->name;
+                $url = implode("/", array_slice($segs, 0, $i+1));
+                $routes[] = ['name' => $name, 'url' => $url];
+            }
+            elseif (class_exists('App\Models\\' . $segs[$i]) && is_numeric($segs[$i + 1]))
+            {
+                $name = ('App\Models\\' . ucwords($segs[$i]))::find($segs[$i+1])->name;
                 $url = implode("/", array_slice($segs, 0, $i+2));
                 $routes[] = ['name' => $name, 'url' => $url];
                 

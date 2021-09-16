@@ -14,16 +14,24 @@ class Routes extends Component
 
     public function mount(){
 
+        $segs = \Request::segments();
+
         $latest_id = 0;
 
-        if(sizeof(\Request()->segments()) == 0){
+        if(sizeof($segs) == 0){
             $this->core = null;
             return;
         }
 
+        if (strtolower($segs[0]) == 'global')
+        {
+            $segs = array_slice($segs, 1, count($segs));
+            $segs = array_merge(['firm', 1], $segs);
+        }
+
         $previous_segment_is_numeric = false;
 
-        foreach(array_reverse(\Request()->segments()) as $segment)
+        foreach(array_reverse($segs) as $segment)
         {
             $segment = strtolower($segment);
 
@@ -69,9 +77,8 @@ class Routes extends Component
         }
 
         if(sizeof($this->parents) == 0){
-
             if(get_class($this->core) != "App\\Models\\Firm" &&
-                get_class($this->core) != "App\\Models\\Lead" )
+                get_class($this->core) != "App\\Models\\Lead")
                 abort(404);
         }
         else{
