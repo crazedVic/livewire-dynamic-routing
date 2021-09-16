@@ -7,8 +7,11 @@ use Livewire\Component;
 class MenuComponent extends Component
 {
     public $view;
+    public $render;
 
     public function getUrl($suffix=""){
+        //if view is more than one segment, determine amount to chop off
+        $subtract = count(explode('-', $this->view));
 
         if($this->view == ""){
             error_log("A");
@@ -17,15 +20,14 @@ class MenuComponent extends Component
         }
         elseif($suffix == ""){
             error_log("B");
-            $segments = array_slice(\Request()->segments(),0,sizeof(\Request()->segments())-1);
+            $segments = array_slice(\Request()->segments(),0,sizeof(\Request()->segments()) - $subtract);
             return "/" .implode("/", $segments);
         }
         else{
             error_log("C");
-            $segments = array_slice(\Request()->segments(),0,sizeof(\Request()->segments()) -1);
+            $segments = array_slice(\Request()->segments(),0,sizeof(\Request()->segments()) - $subtract);
             return "/" .implode("/", $segments) .  "/" . $suffix ;
         }
-
      }
 
      public function isActive($label){
@@ -33,4 +35,9 @@ class MenuComponent extends Component
          error_log($return);
          return $return;
      }
+
+    public function render()
+    {
+        return view($this->render);
+    }
 }
