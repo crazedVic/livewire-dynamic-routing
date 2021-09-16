@@ -25,6 +25,17 @@
         @case("documents-upload")
             <livewire:documents.upload :owner="$firm"/>
         @break
+
+        @case("documents-finance-upload")
+            <livewire:documents.upload :owner="$firm" dept="Finance"/>
+        @break
+        @case("documents-hr-upload")
+            <livewire:documents.upload :owner="$firm" dept="HR"/>
+        @break
+        @case("documents-legal-upload")
+            <livewire:documents.upload :owner="$firm" dept="Legal"/>
+        @break
+
         @case("employees")
             <livewire:employees.index :owner="$firm"/>
         @break

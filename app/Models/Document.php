@@ -9,6 +9,8 @@ class Document extends Model
 {
     use HasFactory;
 
+    public $guarded = [];
+
     public function documentof()
     {
         return $this->morphTo();
