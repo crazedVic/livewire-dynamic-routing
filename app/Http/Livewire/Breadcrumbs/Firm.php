@@ -22,9 +22,15 @@ class Firm extends Component
         $segs = request()->segments();
         $routes = [];
 
+        //add firms root
+        if (count($segs) > 0 && strtolower($segs[0]) == 'firm')
+        {
+            $routes[] = ['name' => 'Firms', 'url' => ''];
+        }
+
         for ($i = 0; $i < count($segs); $i++)
         {
-            if ($segs[$i] == 'global')
+            if (strtolower($segs[$i]) == 'global')
             {
                 $name = 'App\Models\Firm'::find(1)->name;
                 $url = implode("/", array_slice($segs, 0, $i+1));
