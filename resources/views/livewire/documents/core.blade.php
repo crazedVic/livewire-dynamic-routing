@@ -3,11 +3,11 @@
     subview: {{ $subview }}<br>
     @switch($subview)
         @case("details")
-            <livewire:documents.menu view="" />
+            <livewire:base.menu-component view="" render="livewire.documents.menu"/>
             <livewire:documents.read :document="$document"/>
         @break
         @case("notes")
-            <livewire:documents.menu :view="$subview" />
+            <livewire:base.menu-component :view="$subview" render="livewire.documents.menu"/>
             <livewire:notes.index :owner="$document"/>
         @break
         @default
