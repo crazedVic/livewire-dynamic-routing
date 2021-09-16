@@ -3,11 +3,11 @@
 
     @switch($subview)
         @case("documents")
-            <livewire:base.menu-component :view="$subview" render="livewire.employees.menu"/>
+            <livewire:employees.menu :view="$subview" />
             <livewire:documents.index :owner="$employee"/>
         @break
         @case("details")
-            <livewire:base.menu-component view="" render="livewire.employees.menu"/>
+            <livewire:employees.menu view="" />
             <livewire:employees.read :employee="$employee"/>
         @break
         @case("documents-upload")
