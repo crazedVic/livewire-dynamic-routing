@@ -77,9 +77,15 @@ class Routes extends Component
         }
 
         if(sizeof($this->parents) == 0){
-            if(get_class($this->core) != "App\\Models\\Firm" &&
-                get_class($this->core) != "App\\Models\\Lead")
+            if (!$this->core)
+            {
                 abort(404);
+            }
+            else if(get_class($this->core) != "App\\Models\\Firm" &&
+                get_class($this->core) != "App\\Models\\Lead")
+            {
+                abort(404);
+            }
         }
         else{
 
