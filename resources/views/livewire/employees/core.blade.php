@@ -13,5 +13,8 @@
         @case("documents-upload")
             <livewire:documents.upload :owner="$employee"/>
         @break
+        @default
+            {{ abort(404) }}
+        @break
     @endswitch
 </div>

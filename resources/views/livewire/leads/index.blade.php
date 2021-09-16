@@ -1,3 +1,6 @@
 <div>
-    {{-- In work, do what you enjoy. --}}
+    @foreach($leads as $lead)
+    <div> <a href="{{ $this->getUrl($lead->id) }}">
+        {{ $lead->name }}</a></div>
+    @endforeach
 </div>

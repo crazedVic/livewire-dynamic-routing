@@ -22,11 +22,17 @@ class Firm extends Component
         $segs = request()->segments();
         $routes = [];
 
-        //add firms root
+        //add firms root link to firms routes
         if (count($segs) > 0 && strtolower($segs[0]) == 'firm')
         {
-            $routes[] = ['name' => 'Firms', 'url' => ''];
+            $routes[] = ['name' => 'Firms', 'url' => 'firms'];
         }
+        //add leads root link to firms routes
+        elseif (count($segs) > 0 && strtolower($segs[0]) == 'lead')
+        {
+            $routes[] = ['name' => 'Leads', 'url' => 'leads'];
+        }
+
 
         for ($i = 0; $i < count($segs); $i++)
         {

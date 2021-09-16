@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Routes;
 use App\Http\Livewire\Config;
-
+use App\Http\Livewire\Home;
+use App\Http\Livewire\Firms;
+use App\Http\Livewire\Leads;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,5 +16,8 @@ use App\Http\Livewire\Config;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', Home\Core::class)->name('home');
+Route::get('/firms', Firms\Index::class)->name('firms');
+Route::get('/leads', Leads\Index::class)->name('leads');
 Route::get('/config', Config\Home::class)->name('config-home');
 Route::get('/{any?}', Routes::class)->where('any', '.*')->name('home');
