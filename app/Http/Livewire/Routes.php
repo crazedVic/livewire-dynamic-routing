@@ -70,7 +70,6 @@ class Routes extends Component
             }
         }
 
-
         // no trailing segment found.
         if (!$this->subview){
             $this->subview = "details";
@@ -87,8 +86,8 @@ class Routes extends Component
                 abort(404);
             }
         }
-        else{
-
+        else
+        {
             //check entire hierarchy to make sure owners are valid.
             for($x=0;$x<sizeof($this->parents)-1;$x++){
                 // immediate parent doesn't have this core as a child

@@ -36,6 +36,10 @@
             <livewire:documents.upload :owner="$firm" dept="Legal"/>
         @break
 
+        @case('notes')
+            <livewire:notes.index :owner="$firm"/>
+        @break
+
         @case("employees")
             <livewire:employees.index :owner="$firm"/>
         @break
