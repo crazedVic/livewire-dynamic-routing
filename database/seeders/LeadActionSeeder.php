@@ -13,6 +13,6 @@ class LeadActionSeeder extends Seeder
      */
     public function run()
     {
-        //
+        \App\Models\LeadAction::factory()->count(50)->create();
     }
 }

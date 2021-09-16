@@ -22,7 +22,8 @@ class LeadActionFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => "Action: " . $this->faker->sentence(),
+            'description' => $this->faker->paragraph(3)
         ];
     }
 }
