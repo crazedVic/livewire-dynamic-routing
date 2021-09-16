@@ -1,7 +1,9 @@
 <div>
     Notes Index:<br>
-    @foreach($owner->notes as $note)
+    @forelse($owner->notes as $note)
     <div> <a href="{{ $this->getUrl($note->id) }}">
         {{ $note->dept }}: {{ $note->name }}</a></div>
-    @endforeach
+    @empty
+        <div>No notes</div>
+    @endforelse
 </div>
