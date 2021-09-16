@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\LeadAction;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(EmployeeSeeder::class);
         $this->call(NoteSeeder::class);
         $this->call(LeadSeeder::class);
+        $this->call(LeadActionSeeder::class);
 
     }
 }

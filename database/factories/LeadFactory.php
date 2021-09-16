@@ -22,7 +22,7 @@ class LeadFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->sentence(),
+            'name' => "Lead: " . $this->faker->sentence(),
             'description' => $this->faker->paragraph(3)
         ];
     }
