@@ -39,5 +39,8 @@
         @case("employees")
             <livewire:employees.index :owner="$firm"/>
         @break
+        @default
+            {{abort(404)}}
+        @break
     @endswitch
 </div>

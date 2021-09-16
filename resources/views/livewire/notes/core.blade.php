@@ -9,5 +9,8 @@
             <livewire:notes.menu :view="$subview" />
             <livewire:documents.index :owner="$note"/>
         @break
+        @default
+            {{abort(404)}}
+        @break
     @endswitch
 </div>
