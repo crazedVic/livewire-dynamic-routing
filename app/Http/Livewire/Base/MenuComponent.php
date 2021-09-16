@@ -7,6 +7,7 @@ use Livewire\Component;
 class MenuComponent extends Component
 {
     public $view;
+    public $render;
 
     public function getUrl($suffix=""){
 
@@ -25,7 +26,6 @@ class MenuComponent extends Component
             $segments = array_slice(\Request()->segments(),0,sizeof(\Request()->segments()) -1);
             return "/" .implode("/", $segments) .  "/" . $suffix ;
         }
-
      }
 
      public function isActive($label){
@@ -33,4 +33,9 @@ class MenuComponent extends Component
          error_log($return);
          return $return;
      }
+
+    public function render()
+    {
+        return view($this->render);
+    }
 }
