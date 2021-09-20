@@ -7,7 +7,7 @@
             <livewire:documents.index :owner="$firm"/>
         @break
         @case("documents-finance")
-            <livewire:base.menu-component :view="$subview" render="livewire.firms.menu"/>
+        <livewire:base.menu-component :view="$subview" render="livewire.firms.menu"/>
             <livewire:documents.index :owner="$firm" dept="Finance"/>
         @break
         @case("documents-hr")

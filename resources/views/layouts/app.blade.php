@@ -22,11 +22,31 @@
           @livewireStyles
     </head>
     <body class="antialiased">
-        <div style="width:100%;background: lightblue">
-        <livewire:breadcrumbs.firm />
+        <div style="position:fixed;width:100%;top:0">
+        <livewire:shared.header/>
         </div>
 
-        {{ $slot }}
+        <div style="width:100%;background: lightblue; margin-top:30px">
+        <livewire:breadcrumbs.firm />
+        </div>
+        
+        @hasSection('sidemenu')
+        <div style="position:fixed;left:0;top:300px">
+            @yield('sidemenu')
+        </div>
+        <div style="position:fixed;margin-left:200px;top:300px">
+            {{ $slot }}
+        </div>
+        @else
+            {{$slot}}
+        @endif
+
+        
+        
+
+        <div style="position:fixed;width:100%;bottom:0">
+        <livewire:shared.footer/>
+        </div>
     </body>
     @livewireScripts
 </html>

@@ -33,7 +33,6 @@ class Firm extends Component
             $routes[] = ['name' => 'Leads', 'url' => 'leads'];
         }
 
-
         for ($i = 0; $i < count($segs); $i++)
         {
             if (strtolower($segs[$i]) == 'global')
