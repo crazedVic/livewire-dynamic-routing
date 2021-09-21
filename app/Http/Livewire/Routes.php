@@ -16,6 +16,12 @@ class Routes extends Component
 
         $segs = \Request::segments();
 
+        //disallow routes with hyphens
+        if (str_contains(\Request::path(), '-'))
+        {
+            abort(404);
+        }
+
         $latest_id = 0;
 
         if(sizeof($segs) == 0){

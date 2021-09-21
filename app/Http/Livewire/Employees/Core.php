@@ -6,7 +6,6 @@ use Livewire\Component;
 
 class Core extends Component
 {
-
     public $employee;
     public $subview;
     public $parents;

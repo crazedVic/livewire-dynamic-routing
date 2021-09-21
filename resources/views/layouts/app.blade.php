@@ -42,8 +42,6 @@
         @endif
 
         
-        
-
         <div style="position:fixed;width:100%;bottom:0">
         <livewire:shared.footer/>
         </div>
