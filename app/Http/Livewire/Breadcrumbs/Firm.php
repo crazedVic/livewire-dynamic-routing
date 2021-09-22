@@ -22,6 +22,10 @@ class Firm extends Component
         $segs = request()->segments();
         $routes = [];
 
+        //determine department
+        $dept = isset(\Request::segments()[2])? ucwords(\Request::segments()[2]) : null;
+        if ($dept == 'Hr') $dept = 'HR';
+
         for ($i = 0; $i < count($segs); $i++)
         {
             if (strtolower($segs[$i]) == 'global')
@@ -30,19 +34,42 @@ class Firm extends Component
                 $url = implode("/", array_slice($segs, 0, $i+1));
                 $routes[] = ['name' => $name, 'url' => $url];
             }
+            elseif (in_array(strtolower($segs[$i]), ['marketing', 'operations', 'all', 'legal', 'hr', 'finance'])) 
+            {   
+                //skip singular departments
+                continue;
+            }
+            elseif (strtolower($segs[$i]) == 'documents')
+            {
+                //add specific view link
+                $url = implode("/", array_slice($segs, 0, $i+1));
+                $routes[] = ['name' => $dept . ' Documents', 'url' => $url];
+                
+            }
             elseif (class_exists('App\Models\\' . $segs[$i]) && is_numeric($segs[$i + 1]))
             {
-                $name = ('App\Models\\' . ucwords($segs[$i]))::find($segs[$i+1])->name;
+                //add index view link (with exceptions)
+                if 
+                (
+                    strtolower($segs[$i] != 'firm')  //skipped because it's not needed
+                )
+                {
+                    //determine name of index view
+                    if ($segs[$i] == 'document')
+                        $name = $dept . ' Documents';
+                    else
+                        $name = ucwords($segs[$i] . 's');
+
+                    $url = implode("/", array_slice($segs, 0, $i+1)) . 's';
+                    $routes[] = ['name' => $name, 'url' => $url];
+                }
                 
-                //add index view link
-                $url = implode("/", array_slice($segs, 0, $i+1)) . 's';
-                $routes[] = ['name' => ucwords($segs[$i] . 's'), 'url' => $url];
+                $name = ('App\Models\\' . ucwords($segs[$i]))::find($segs[$i+1])->name;
 
                 //add specific view link
                 $url = implode("/", array_slice($segs, 0, $i+2));
                 $routes[] = ['name' => $name, 'url' => $url];
                 
-
                 //manually skip forward to 
                 //prevent number from being 
                 //turned into its own route

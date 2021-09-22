@@ -12,6 +12,7 @@
             @case("App\\Models\Document")
                 <livewire:documents.core :document="$core" :subview="$subview" :parents="$parents"/>
             @break
+
             @case("App\\Models\Employee")
                 <livewire:employees.core :employee="$core" :subview="$subview" :parents="$parents"/>
             @break

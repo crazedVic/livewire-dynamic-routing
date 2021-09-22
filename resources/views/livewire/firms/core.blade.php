@@ -6,18 +6,18 @@
             <livewire:base.menu-component :view="$subview" render="livewire.firms.menu"/>
             <livewire:documents.index :owner="$firm"/>
         @break
-        @case("documents-finance")
-        <livewire:base.menu-component :view="$subview" render="livewire.firms.menu"/>
+        {{-- @case("finance-documents")
+            <livewire:base.menu-component :view="$subview" render="livewire.firms.menu"/>
             <livewire:documents.index :owner="$firm" dept="Finance"/>
         @break
-        @case("documents-hr")
+        @case("hr-documents")
             <livewire:base.menu-component :view="$subview" render="livewire.firms.menu"/>
             <livewire:documents.index :owner="$firm" dept="HR"/>
         @break
-        @case("documents-legal")
+        @case("legal-documents")
             <livewire:base.menu-component :view="$subview" render="livewire.firms.menu"/>
             <livewire:documents.index :owner="$firm" dept="Legal"/>
-        @break
+        @break --}}
         @case("details")
             <livewire:base.menu-component view="" render="livewire.firms.menu"/>
             <livewire:firms.read :firm="$firm"/>
@@ -26,15 +26,15 @@
             <livewire:documents.upload :owner="$firm"/>
         @break
 
-        @case("documents-finance-upload")
+        {{-- @case("finance-documents-upload")
             <livewire:documents.upload :owner="$firm" dept="Finance"/>
         @break
-        @case("documents-hr-upload")
+        @case("hr-documents-upload")
             <livewire:documents.upload :owner="$firm" dept="HR"/>
         @break
-        @case("documents-legal-upload")
+        @case("legal-documents-upload")
             <livewire:documents.upload :owner="$firm" dept="Legal"/>
-        @break
+        @break --}}
 
         @case('notes')
             <livewire:base.menu-component :view="$subview" render="livewire.firms.menu"/>

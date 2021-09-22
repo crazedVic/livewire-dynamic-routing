@@ -2,7 +2,7 @@
     Department: {{$this->dept}}<br>
 
     @forelse($documents as $document)
-    <div> <a href="{{ $this->getUrl($document->id) }}">
+    <div> <a href="{{rtrim(url()->current(), 's') }}/{{$document->id}}">
         {{ $document->dept }}: {{ $document->name }}</a></div>
     @empty
         <div>No documents</div>

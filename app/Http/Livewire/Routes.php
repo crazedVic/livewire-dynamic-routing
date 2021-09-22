@@ -35,10 +35,21 @@ class Routes extends Component
         }
 
         $previous_segment_is_numeric = false;
+        $dept = null;
 
         foreach(array_reverse($segs) as $segment)
         {
             $segment = strtolower($segment);
+            
+            if (in_array(strtolower($segment), ['marketing', 'operations', 'all', 'legal', 'hr', 'finance']))
+            {
+                $dept = $segment;
+
+                //*can use department security here
+
+                //skip segment, not used for routing
+                continue;
+            }
 
             if(is_numeric($segment))
             {
@@ -75,17 +86,31 @@ class Routes extends Component
             }
         }
 
+        // establish core view, would be the first one in the array
+        // based on other rules i think
+        $this->core = array_shift($this->parents);
+
+        if(!$this->core){
+            abort(404);
+        }
+
+        //url without department not allowed
+        if (count($segs) > 2 && !$dept){
+            abort(404);
+        }
+
+        //check if department is allowed for core
+        if (strtolower($dept) != 'hr' && get_class($this->core) == 'App\Models\Employee'){
+            abort(404);
+        }
+
         // no trailing segment found.
         if (!$this->subview){
             $this->subview = "details";
         }
 
         if(sizeof($this->parents) == 0){
-            if (!$this->core)
-            {
-                abort(404);
-            }
-            else if(get_class($this->core) != "App\\Models\\Firm" &&
+            if(get_class($this->core) != "App\\Models\\Firm" &&
                 get_class($this->core) != "App\\Models\\Lead")
             {
                 abort(404);
@@ -107,16 +132,7 @@ class Routes extends Component
                 }
             }
         }
-
-        // establish core view, would be the first one in the array
-        // based on other rules i think
-        $this->core = array_shift($this->parents);
-
-        if(!$this->core){
-            abort(404);
-        }
     }
-
 
     public function render()
     {

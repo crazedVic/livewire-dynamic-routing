@@ -10,8 +10,15 @@ class MenuComponent extends Component
     public $render;
 
     public function getUrl($suffix=""){
-        //if view is more than one segment, determine amount to chop off
-        $subtract = count(explode('-', $this->view));
+        //chop off until first id is found
+        $subtract = 0;
+        foreach(array_reverse(\Request::segments()) as $segment)
+        {   
+            //no more counting
+            if (is_numeric($segment)) break;
+
+            $subtract++;
+        }
 
         if($this->view == ""){
             error_log("A");
