@@ -6,7 +6,6 @@ use Livewire\Component;
 
 class Routes extends Component
 {
-
     public $parents = [];
     public $subview = "";
     public $children = [];

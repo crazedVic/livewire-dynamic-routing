@@ -15,17 +15,17 @@ class MenuComponent extends Component
 
         if($this->view == ""){
             error_log("A");
-            $segments = array_slice(\Request()->segments(),0,sizeof(\Request()->segments()));
+            $segments = array_slice(\Request::segments(),0,sizeof(\Request::segments()));
             return "/" .implode("/", $segments) .  ($suffix!="" ? "/" . $suffix: "");
         }
         elseif($suffix == ""){
             error_log("B");
-            $segments = array_slice(\Request()->segments(),0,sizeof(\Request()->segments()) - $subtract);
+            $segments = array_slice(\Request::segments(),0,sizeof(\Request::segments()) - $subtract);
             return "/" .implode("/", $segments);
         }
         else{
             error_log("C");
-            $segments = array_slice(\Request()->segments(),0,sizeof(\Request()->segments()) - $subtract);
+            $segments = array_slice(\Request::segments(),0,sizeof(\Request::segments()) - $subtract);
             return "/" .implode("/", $segments) .  "/" . $suffix ;
         }
      }
