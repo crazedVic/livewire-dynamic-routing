@@ -17,7 +17,7 @@
             <livewire:config.example-page :number="3"/>
         @break
         @default
-            {{abort(404)}}
+            {{abort(419, 'Route does not exist')}}
         @break
     @endswitch
 </div>

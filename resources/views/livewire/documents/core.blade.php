@@ -11,7 +11,7 @@
             <livewire:notes.index :owner="$document"/>
         @break
         @default
-            {{abort(404)}}
+            {{abort(419, 'Route does not exist')}}
         @break
     @endswitch
 </div>

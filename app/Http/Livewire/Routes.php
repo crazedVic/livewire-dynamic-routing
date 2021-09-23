@@ -11,14 +11,14 @@ class Routes extends Component
     public $children = [];
     public $core;
 
-    public function mount(){
-
+    public function mount()
+    {
         $segs = \Request::segments();
 
         //disallow routes with hyphens
         if (str_contains(\Request::path(), '-'))
         {
-            abort(404);
+            abort(419, 'Invalid URL');
         }
 
         $latest_id = 0;
@@ -61,10 +61,12 @@ class Routes extends Component
 
                 if ($previous_segment_is_numeric && !class_exists($str_class))
                 {
-                    abort(404);
+                    abort(419, 'Model does not exist');
                 }
                 elseif(class_exists($str_class)){
-                    $model = $str_class::findOrFail($latest_id);
+                    $model = $str_class::find($latest_id);
+                    if(!$model)
+                        abort(419, 'Record not found');
                     $this->parents[] = $model;
                     $this->children[] = $segment . "s";
 
@@ -79,29 +81,16 @@ class Routes extends Component
                 }
                 else
                 {
-                    abort(404);
+                    abort(419, 'Error');
                 }
 
                 $previous_segment_is_numeric = false;
             }
         }
 
-        // establish core view, would be the first one in the array
-        // based on other rules i think
-        $this->core = array_shift($this->parents);
-
-        if(!$this->core){
-            abort(404);
-        }
-
         //url without department not allowed
         if (count($segs) > 2 && !$dept){
-            abort(404);
-        }
-
-        //check if department is allowed for core
-        if (strtolower($dept) != 'hr' && get_class($this->core) == 'App\Models\Employee'){
-            abort(404);
+            abort(419, 'No department');
         }
 
         // no trailing segment found.
@@ -109,29 +98,44 @@ class Routes extends Component
             $this->subview = "details";
         }
 
-        if(sizeof($this->parents) == 0){
-            if(get_class($this->core) != "App\\Models\\Firm" &&
-                get_class($this->core) != "App\\Models\\Lead")
-            {
-                abort(404);
-            }
-        }
-        else
-        {
+        if(sizeof($this->parents) > 1){    
             //check entire hierarchy to make sure owners are valid.
             for($x=0;$x<sizeof($this->parents)-1;$x++){
                 // immediate parent doesn't have this core as a child
                 if(!isset($this->parents[$x+1][$this->children[$x]])){
-                    dd( get_class($this->parents[$x+1]). ' doesn\'t have collection ' . $this->children[$x]);
-                    //abort(404);
+                    abort(419, get_class($this->parents[$x+1]). ' doesn\'t have collection ' . $this->children[$x]);
                 }
 
                 if(!$this->parents[$x+1][$this->children[$x]]->contains($this->parents[$x])){
-                    dd('parent has collection but not this child');
-                    //abort(404);
+                    abort(419, 'Child not member of collection');
                 }
             }
+
+            // establish core view, would be the first one in the array
+            // based on other rules i think
+            $this->core = array_shift($this->parents);
         }
+        else
+        {
+            // establish core view, would be the first one in the array
+            // based on other rules i think
+            $this->core = array_shift($this->parents);
+
+            if(get_class($this->core) != "App\\Models\\Firm" &&
+            get_class($this->core) != "App\\Models\\Lead")
+            {
+                abort(419, 'Not lead or firm');
+            }
+        }
+
+        if(!$this->core){
+            abort(419, 'No core');
+        }
+
+        //check if department is allowed for core
+        if (strtolower($dept) != 'hr' && get_class($this->core) == 'App\Models\Employee'){
+            abort(419, 'Department not allowed');
+        }  
     }
 
     public function render()
