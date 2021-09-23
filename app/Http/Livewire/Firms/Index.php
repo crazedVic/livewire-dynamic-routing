@@ -13,8 +13,4 @@ class Index extends Component
         ['firms' => Firm::all()]);
 
     }
-
-    public function getUrl($id){
-        return "/firm/" . $id;
-     }
 }

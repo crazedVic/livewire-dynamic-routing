@@ -12,9 +12,4 @@ class Index extends Component
     {
         return view('livewire.employees.index');
     }
-
-    public function getUrl($id){
-        $segments = array_slice(\Request()->segments(),0,sizeof(\Request()->segments())-1);
-        return "/" .implode("/", $segments) . "/employee/" . $id;
-     }
 }

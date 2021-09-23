@@ -1,6 +1,6 @@
 <div>
     @forelse($owner->employees as $employee)
-    <div> <a href="{{ $this->getUrl($employee->id) }}">
+    <div> <a href="{{ rtrim(url()->current(), 's')}}/{{$employee->id}}">
          {{ $employee->name }}</a></div>
     @empty
         <div>No employees</div>

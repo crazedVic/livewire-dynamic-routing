@@ -13,8 +13,4 @@ class Index extends Component
         ['leads' => Lead::all()]);
 
     }
-
-    public function getUrl($id){
-        return "/lead/" . $id;
-     }
 }
