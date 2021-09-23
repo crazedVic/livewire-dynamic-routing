@@ -37,11 +37,17 @@ class MenuComponent extends Component
         }
      }
 
-     public function isActive($label){
-         $return =  "style=\"". ($this->view == $label ? "text-decoration:underline" : "text-decoration:none") . "\"";
-         error_log($return);
-         return $return;
-     }
+    public function isActive($label = '', $dept = null){
+        if ($dept)
+            $active = isset(\Request::segments()[2]) && $dept == strtolower(\Request::segments()[2]) && $this->view == $label;
+        else
+            $active = $this->view == $label;
+
+        $return = "style=\"". ($active ? "text-decoration:underline" : "text-decoration:none") . "\"";
+        error_log($return);
+
+        return $return;
+    }
 
     public function render()
     {
