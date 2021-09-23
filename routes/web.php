@@ -18,7 +18,9 @@ use App\Http\Livewire\Leads;
 */
 Route::get('/', Home\Core::class)->name('home');
 Route::get('/firms', Firms\Index::class)->name('firms');
+Route::get('/firms/add', Firms\Add::class)->name('firms-add');
 Route::get('/leads', Leads\Index::class)->name('leads');
+Route::get('/leads/add', Leads\Add::class)->name('leads');
 
 Route::get('/config/{any?}', Config\Core::class)->where('any', '.*')->name('config-home');
 Route::get('/{any?}', Routes::class)->where('any', '.*')->name('home');

@@ -120,7 +120,7 @@ class Routes extends Component
             // establish core view, would be the first one in the array
             // based on other rules i think
             $this->core = array_shift($this->parents);
-
+            
             if(get_class($this->core) != "App\\Models\\Firm" &&
             get_class($this->core) != "App\\Models\\Lead")
             {
