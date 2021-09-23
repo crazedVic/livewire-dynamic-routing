@@ -23,17 +23,6 @@ class Routes extends Component
 
         $latest_id = 0;
 
-        if(sizeof($segs) == 0){
-            $this->core = null;
-            return;
-        }
-
-        if (strtolower($segs[0]) == 'global')
-        {
-            $segs = array_slice($segs, 1, count($segs));
-            $segs = array_merge(['firm', 1], $segs);
-        }
-
         $previous_segment_is_numeric = false;
         $dept = null;
 
@@ -115,7 +104,7 @@ class Routes extends Component
             // based on other rules i think
             $this->core = array_shift($this->parents);
         }
-        else
+        elseif (sizeof($this->parents) == 1)
         {
             // establish core view, would be the first one in the array
             // based on other rules i think
@@ -127,8 +116,9 @@ class Routes extends Component
                 abort(419, 'Not lead or firm');
             }
         }
-
-        if(!$this->core){
+        else
+        {
+            //no core to shift
             abort(419, 'No core');
         }
 
